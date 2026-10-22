@@ -614,31 +614,62 @@ class PathologyChatbot:
                 ])
             return {"question": q_clean, "answer": "\n".join(doc_parts), "disclaimer": DISCLAIMER}
 
-        # Intent: Dietary / Nutrition Specific Inquiry (e.g. "What foods to eat for iron?", "Diet for cholesterol")
-        is_diet_inquiry = _has_word_or_phrase(q_lower, ["diet", "food", "foods", "eat", "eating", "avoid", "nutrition"])
-        is_action_inquiry = _has_word_or_phrase(q_lower, ["what should i do", "what to do", "next step", "next steps", "recommendation", "action plan"])
+        # Intent: Management, Optimization, Diet, Increase/Decrease Guidance
+        # e.g. "How to increase hemoglobin?", "How to lower blood sugar?", "Foods to eat for platelets"
+        is_management_inquiry = _has_word_or_phrase(q_lower, [
+            "increase", "raise", "boost", "improve", "elevate", "up",
+            "lower", "reduce", "decrease", "bring down", "drop",
+            "treat", "treatment", "cure", "remedy", "fix", "manage", "management",
+            "diet", "food", "foods", "eat", "eating", "avoid", "nutrition", "nutritional",
+            "what should i do", "what to do", "next step", "next steps", "recommendation", "action plan", "protocol"
+        ])
 
-        if is_diet_inquiry or is_action_inquiry:
+        if is_management_inquiry:
             matched_bm = match_biomarker(q_clean)
-            if matched_bm and matched_bm.get("diet_lifestyle"):
+            if matched_bm:
+                # Find patient's test if present in report
+                pt_test = None
+                if all_tests:
+                    pt_test = self._find_test_in_report(matched_bm["name"].lower(), all_tests)
+                    if not pt_test and matched_bm.get("aliases"):
+                        for a in matched_bm["aliases"]:
+                            pt_test = self._find_test_in_report(a.lower(), all_tests)
+                            if pt_test:
+                                break
+
+                pt_context = ""
+                if pt_test:
+                    val = pt_test.get("value_raw")
+                    unit = pt_test.get("unit_normalized") or pt_test.get("unit_raw", "")
+                    status = pt_test.get("status", "")
+                    ref = pt_test.get("reference_range_display") or pt_test.get("reference_range_raw", "")
+                    pt_context = f"> 📊 **Patient Value on File ({patient_name}):** **{val} {unit}** (Status: **{status}**, Biological Interval: {ref})\n\n"
+
                 ans_parts = [
-                    f"## 🥗 Dietary & Lifestyle Protocol for **{matched_bm['name']}**\n",
-                    matched_bm["diet_lifestyle"],
-                    f"\n*Biological role:* {matched_bm.get('role', '')}",
+                    f"## 🩺 Clinical Protocol: How to Manage & Optimize **{matched_bm['name']}**\n",
+                    pt_context,
+                    "### 🥗 Evidence-Based Nutrition & Lifestyle Protocol",
+                    matched_bm.get("diet_lifestyle", "Ensure balanced nutrient-dense nutrition and adequate daily hydration."),
+                    "\n### 🔍 Common Underlying Causes & Etiology",
+                    f"• **Potential Causes of Low Levels:** {matched_bm.get('low_causes', 'Nutritional deficiency, chronic blood loss, or impaired production.')}",
+                    f"• **Potential Causes of High Levels:** {matched_bm.get('high_causes', 'Dehydration, chronic hypoxia, or reactive stress.')}",
+                    "\n### 📋 Clinical Next Steps with Your Physician",
+                    f"• {matched_bm.get('doctor_questions', 'Discuss these findings with your doctor for targeted laboratory follow-up.')}",
+                    "• **Medical Notice:** Do not start high-dose prescription supplements or pharmaceuticals without direct physician guidance.",
                 ]
                 return {"question": q_clean, "answer": "\n".join(ans_parts), "disclaimer": DISCLAIMER}
 
-            if has_report and is_action_inquiry:
-                ans_parts = ["## 🩺 Recommended Actions & Lifestyle Guidance\n"]
+            if has_report:
+                ans_parts = ["## 🩺 Clinical Action Plan & Lifestyle Guidance\n"]
                 if not abnormal_tests:
-                    ans_parts.append("✅ All your test results are within normal limits!\n")
-                    ans_parts.append("**Maintenance Protocol:**")
+                    ans_parts.append("✅ All investigated parameters are within normal biological limits!\n")
+                    ans_parts.append("**Optimal Maintenance Protocol:**")
                     ans_parts.append("1. Continue a balanced Mediterranean-style whole-food diet.")
                     ans_parts.append("2. Maintain optimal daily hydration (2-2.5 liters of water).")
                     ans_parts.append("3. Engage in at least 150 minutes of moderate aerobic exercise weekly.")
-                    ans_parts.append("4. Schedule annual routine health checks.")
+                    ans_parts.append("4. Schedule routine annual wellness checks.")
                 else:
-                    ans_parts.append(f"Based on **{len(abnormal_tests)} out-of-range finding(s)** in your report:\n")
+                    ans_parts.append(f"Based on **{len(abnormal_tests)} out-of-range finding(s)** in {patient_name}'s report:\n")
                     step_num = 1
                     for t in abnormal_tests:
                         t_name = t.get("test_name_normalized") or t.get("test_name_raw")
@@ -652,8 +683,8 @@ class PathologyChatbot:
 
                     ans_parts.append("### 📋 Clinical Next Steps")
                     ans_parts.append("• **Physician Consultation:** Present these results to your doctor for clinical correlation.")
-                    ans_parts.append("• **Repeat Testing:** Repeat testing is often advised in 4-8 weeks to establish trend lines.")
-                    ans_parts.append("• **Do not self-prescribe:** Any high-dose supplements or prescription drugs should be doctor-approved.")
+                    ans_parts.append("• **Follow-up Testing:** Repeat testing is often advised in 4-8 weeks to establish trend lines.")
+                    ans_parts.append("• **Safety:** Do not take high-dose unprescribed supplements or self-medicate.")
 
                 return {"question": q_clean, "answer": "\n".join(ans_parts), "disclaimer": DISCLAIMER}
 

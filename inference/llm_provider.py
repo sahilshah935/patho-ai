@@ -140,17 +140,34 @@ class LLMProvider:
         if not api_key:
             return None
 
-        # Build contents array
-        contents = []
+        # Build sanitized contents array adhering strictly to Gemini's alternation rules
+        raw_turns = []
         if history:
             for m in history[-6:]:  # Keep last 6 conversational turns
                 role = "user" if m.get("sender") in ("user", "human") else "model"
-                text = m.get("text", "")
+                text = (m.get("text") or "").strip()
                 if text:
-                    contents.append({"role": role, "parts": [{"text": text}]})
+                    raw_turns.append({"role": role, "parts": [{"text": text}]})
+
+        # Gemini requires the first turn to be 'user'
+        while raw_turns and raw_turns[0]["role"] == "model":
+            raw_turns.pop(0)
+
+        # Ensure strict alternating roles: user -> model -> user -> model
+        contents = []
+        for turn in raw_turns:
+            if not contents:
+                contents.append(turn)
+            elif contents[-1]["role"] == turn["role"]:
+                contents[-1]["parts"][0]["text"] += "\n\n" + turn["parts"][0]["text"]
+            else:
+                contents.append(turn)
 
         # Append current user prompt
-        contents.append({"role": "user", "parts": [{"text": prompt}]})
+        if contents and contents[-1]["role"] == "user":
+            contents[-1]["parts"][0]["text"] += "\n\n" + prompt
+        else:
+            contents.append({"role": "user", "parts": [{"text": prompt}]})
 
         payload: Dict[str, Any] = {
             "contents": contents,

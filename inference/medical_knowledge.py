@@ -533,21 +533,45 @@ SYMPTOMS_DB: Dict[str, Dict[str, Any]] = {
 # ---------------------------------------------------------------------------
 
 def match_biomarker(query: str) -> Optional[Dict[str, Any]]:
-    """Match a user question to a biomarker entry via canonical name or aliases."""
+    """Match a user question to a biomarker entry via canonical name, aliases, or fuzzy typo tolerance."""
     q_lower = query.lower()
     
-    # Direct canonical match
+    # 1. Direct canonical substring match
     for name, data in BIOMARKERS_DB.items():
         if name.lower() in q_lower:
             return {"name": name, **data}
 
-    # Alias match
+    # 2. Exact word-boundary alias match
     for name, data in BIOMARKERS_DB.items():
         for alias in data.get("aliases", []):
-            # Use word boundary or exact token matching
             pattern = rf"\b{re.escape(alias)}\b"
             if re.search(pattern, q_lower):
                 return {"name": name, **data}
+
+    # 3. Fuzzy match for common misspellings (e.g. "haemogloblin", "colestrol", "platlets", "creatine")
+    try:
+        from rapidfuzz import fuzz
+        words = re.findall(r"\b[a-zA-Z0-9_-]+\b", q_lower)
+        best_match = None
+        best_score = 0.0
+
+        for name, data in BIOMARKERS_DB.items():
+            candidates = [name.lower()] + [a.lower() for a in data.get("aliases", [])]
+            for w in words:
+                if len(w) >= 4:
+                    for cand in candidates:
+                        # Skip if lengths differ drastically
+                        if abs(len(w) - len(cand)) > 4:
+                            continue
+                        score = fuzz.ratio(w, cand)
+                        if score > 78 and score > best_score:
+                            best_score = score
+                            best_match = {"name": name, **data}
+
+        if best_match and best_score >= 78:
+            return best_match
+    except Exception:
+        pass
 
     return None
 
