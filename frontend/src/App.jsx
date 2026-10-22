@@ -592,7 +592,7 @@ export default function App() {
             }}
           />
           <div style={{ fontSize: 11, color: "#94A3B8" }}>
-            {engineInfo ? `${engineInfo.model} (${engineInfo.provider})` : "Gemini 2.5 Active"}
+            Clinical AI Engine Active
           </div>
         </div>
       </aside>
@@ -767,13 +767,8 @@ export default function App() {
                       rows={1}
                     />
 
-                    {/* Right Controls: Model Pill & Send Arrow */}
+                    {/* Right Controls: Send Arrow */}
                     <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                      <div className="gemini-model-badge">
-                        <Sparkles size={13} style={{ color: "#38BDF8" }} />
-                        <span>Gemini 2.5 Flash</span>
-                      </div>
-
                       <button
                         onClick={() => handleSendQuestion()}
                         disabled={!input.trim() || chatLoading}
@@ -1411,7 +1406,7 @@ export default function App() {
                       }}
                     >
                       <RefreshCw size={14} className="animate-spin" />
-                      <span>Synthesizing medical intelligence with Gemini...</span>
+                      <span>Synthesizing clinical response...</span>
                     </div>
                   </div>
                 )}
@@ -1467,11 +1462,6 @@ export default function App() {
 
                   {/* Right Controls */}
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <div className="gemini-model-badge">
-                      <Sparkles size={13} style={{ color: "#38BDF8" }} />
-                      <span>Gemini 2.5 Flash</span>
-                    </div>
-
                     <button
                       onClick={() => handleSendQuestion()}
                       disabled={!input.trim() || chatLoading}
