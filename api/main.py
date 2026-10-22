@@ -7,10 +7,18 @@ import sys
 import os
 import re
 
-# Add the project root to sys.path so we can import pathology_ai modules
-PACKAGE_ROOT = Path(__file__).resolve().parents[2]
-if str(PACKAGE_ROOT) not in sys.path:
-    sys.path.insert(0, str(PACKAGE_ROOT))
+# Add the project root to sys.path and support pathology_ai module aliasing
+REPO_ROOT = Path(__file__).resolve().parents[1]
+PARENT_ROOT = Path(__file__).resolve().parents[2]
+for p in (REPO_ROOT, PARENT_ROOT):
+    if str(p) not in sys.path:
+        sys.path.insert(0, str(p))
+
+if "pathology_ai" not in sys.modules:
+    import types
+    _pkg = types.ModuleType("pathology_ai")
+    _pkg.__path__ = [str(REPO_ROOT)]
+    sys.modules["pathology_ai"] = _pkg
 
 from pathology_ai.configs.paths import PREDICTIONS_DIR, RENDERED_PAGES_DIR, UPLOADS_DIR, OUTPUT_ROOT
 from pathology_ai.preprocessing.pdf_parser import PDFParser
