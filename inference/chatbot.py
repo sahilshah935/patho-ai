@@ -143,23 +143,31 @@ class PathologyChatbot:
             "rbc": "RBC Count", "red blood": "RBC Count",
             "wbc": "Total Leucocyte Count", "white blood": "Total Leucocyte Count", "leucocyte": "Total Leucocyte Count",
             "platelet": "Platelet Count", "plt": "Platelet Count",
+            "plateletcrit": "Plateletcrit", "pct": "Plateletcrit",
+            "mpv": "Mean Platelet Volume", "pdw": "Platelet Distribution Width", "p-lcr": "Platelet Large Cell Ratio",
             "pcv": "Packed Cell Volume", "hematocrit": "Packed Cell Volume", "haematocrit": "Packed Cell Volume",
             "mcv": "MCV", "mchc": "MCHC", "mch": "MCH",
-            "rdw": "RDW-CV", "mpv": "MPV",
+            "rdw": "RDW-CV", "rdw-sd": "RDW-SD",
             "esr": "ESR", "sedimentation": "ESR",
             "neutrophil": "Neutrophils", "lymphocyte": "Lymphocyte %", "monocyte": "Monocytes",
             "eosinophil": "Eosinophils", "basophil": "Basophils",
+            "aec": "Absolute Eosinophil Count", "anc": "Absolute Neutrophil Count",
+            "alc": "Absolute Lymphocyte Count", "amc": "Absolute Monocyte Count", "abc": "Absolute Basophil Count",
             "sugar": "Glucose - Fasting", "glucose": "Glucose - Fasting", "fbs": "Glucose - Fasting",
+            "rbs": "Blood Glucose Random", "ppbs": "Post Prandial Blood Sugar",
             "hba1c": "HbA1c", "glycated": "HbA1c",
             "creatinine": "Creatinine", "urea": "Blood Urea", "bun": "Blood Urea", "uric acid": "Uric Acid",
-            "bilirubin": "Total Bilirubin",
+            "bilirubin": "Total Bilirubin", "direct bilirubin": "Direct Bilirubin",
+            "total protein": "Total Protein", "globulin": "Globulin", "a/g ratio": "A/G Ratio", "ag ratio": "A/G Ratio",
             "sgot": "SGOT", "ast": "SGOT", "sgpt": "SGPT", "alt": "SGPT", "alp": "Alkaline Phosphatase",
+            "sodium": "Sodium", "potassium": "Potassium", "chloride": "Chloride",
             "tsh": "TSH", "thyroid": "TSH", "t4": "Free T4", "ft4": "Free T4",
             "cholesterol": "Total Cholesterol", "triglyceride": "Triglycerides",
             "hdl": "HDL Cholesterol", "ldl": "LDL Cholesterol",
-            "crp": "C-Reactive Protein", "ferritin": "Ferritin",
+            "crp": "C-Reactive Protein", "procalcitonin": "Procalcitonin",
+            "ferritin": "Ferritin", "serum iron": "Serum Iron", "iron": "Serum Iron", "tibc": "Total Iron Binding Capacity",
             "vitamin d": "25-OH Vitamin D", "vitamin b12": "Vitamin B12",
-            "calcium": "Serum Calcium", "iron": "Ferritin",
+            "calcium": "Serum Calcium",
         }
         tests_by_name = {(t.get("test_name_normalized") or "").lower(): t for t in all_tests}
 
@@ -793,6 +801,77 @@ class PathologyChatbot:
                     return {"question": q_clean, "answer": gen_answer, "disclaimer": DISCLAIMER}
             except Exception as e:
                 print(f"[PathologyChatbot] Transformer generate error: {e}")
+
+        # -------------------------------------------------------------------
+        # Clinical Terminology & Concept Definition ("What does X mean?", "What is X?", "Explain X")
+        # -------------------------------------------------------------------
+        is_definition_query = _has_word_or_phrase(q_lower, [
+            "what does", "what is", "what are", "meaning of", "define", "definition",
+            "explain", "tell me about", "what's", "whats", "stand for", "stands for", "significance of"
+        ])
+        if is_definition_query:
+            term_clean = re.sub(
+                r"^(what\s+does|what\s+is|what\s+are|meaning\s+of|define|definition\s+of|explain|tell\s+me\s+about|what's|whats)\s+",
+                "",
+                q_clean,
+                flags=re.IGNORECASE,
+            )
+            term_clean = re.sub(r"\s+(mean|signify|stand\s+for|indicate)\s*\??$", "", term_clean, flags=re.IGNORECASE).strip(" ?.")
+            term_lower = term_clean.lower()
+
+            if any(k in term_lower for k in ["reference range", "normal range", "biological interval"]):
+                return {
+                    "question": q_clean,
+                    "answer": (
+                        "## 📊 Understanding Biological Reference Ranges\n\n"
+                        "A **Biological Reference Range** (or normal range) represents the set of values that 95% of a healthy reference population falls into.\n\n"
+                        "• **How it is determined:** Clinical laboratories test thousands of healthy, disease-free individuals and establish the central 95% interval (mean ± 2 standard deviations).\n"
+                        "• **Statistical variation:** By definition, 5% of completely healthy people have test values naturally falling slightly outside this interval without any underlying disease.\n"
+                        "• **Context matters:** Reference intervals vary between laboratories depending on the specific analyzer, assay reagents, age, sex, and testing methodology."
+                    ),
+                    "disclaimer": DISCLAIMER,
+                }
+            if any(k in term_lower for k in ["borderline", "borderline high", "borderline low"]):
+                return {
+                    "question": q_clean,
+                    "answer": (
+                        "## 🟡 What Does 'Borderline' Mean on a Lab Report?\n\n"
+                        "A **Borderline** test result sits right on the edge of the standard biological reference interval (just slightly above or below the threshold).\n\n"
+                        "• **Transient Factors:** Mild borderline deviations are frequently temporary and can be influenced by daily hydration status, recent meals, intense exercise, sleep quality, stress, or time of collection.\n"
+                        "• **Clinical Significance:** A single borderline result is rarely an emergency. Doctors evaluate trends over time rather than a single isolated number.\n"
+                        "• **Recommendation:** Physicians often suggest re-checking borderline markers after 4 to 12 weeks to see if they normalize spontaneously."
+                    ),
+                    "disclaimer": DISCLAIMER,
+                }
+            if any(k in term_lower for k in ["critical", "panic value"]):
+                return {
+                    "question": q_clean,
+                    "answer": (
+                        "## 🚨 What Is a 'Critical Value' (Panic Value)?\n\n"
+                        "A **Critical Value** represents a test result that deviates significantly beyond standard physiological limits and may indicate an acute, potentially life-threatening condition requiring immediate medical intervention.\n\n"
+                        "• **Laboratory Protocol:** When an automated analyzer detects a critical value (e.g. critically low potassium, severe hypoglycemia, or severe thrombocytopenia), the laboratory immediately contacts the treating physician or emergency department.\n"
+                        "• **Patient Action:** If your report indicates a critical status, contact your prescribing physician or urgent care center promptly."
+                    ),
+                    "disclaimer": DISCLAIMER,
+                }
+
+            term_display = term_clean if len(term_clean) > 1 else q_clean
+            return {
+                "question": q_clean,
+                "answer": (
+                    f"## 🔬 Clinical Overview: **{term_display}**\n\n"
+                    f"In laboratory medicine, clinical parameters, abbreviations, and indices measure specific cellular counts, enzymatic activity, or organ clearance pathways.\n\n"
+                    f"• **Common Laboratory Abbreviations:**\n"
+                    f"  - **PCT:** **Plateletcrit** (volume % of blood occupied by platelets in CBC) or **Procalcitonin** (bacterial infection/sepsis biomarker).\n"
+                    f"  - **MPV:** **Mean Platelet Volume** (average platelet size).\n"
+                    f"  - **PDW:** **Platelet Distribution Width** (variation in platelet dimensions).\n"
+                    f"  - **MCV / MCH / MCHC:** Red blood cell indices characterizing cell size and hemoglobin content.\n"
+                    f"  - **AEC / ANC / ALC:** Absolute Eosinophil, Neutrophil, and Lymphocyte counts.\n"
+                    f"  - **RBS / FBS / PPBS:** Random, Fasting, and Post-Prandial Blood Sugar measurements.\n\n"
+                    f"💡 *You can ask me to explain any specific parameter from your report (e.g., 'What does Plateletcrit mean?', 'Explain MCV', or 'What is Creatinine?'), and I will provide an evidence-based clinical breakdown!*"
+                ),
+                "disclaimer": DISCLAIMER,
+            }
 
         # -------------------------------------------------------------------
         # 4. FINAL UNIVERSAL CLINICAL RESPONSE SYNTHESIS
