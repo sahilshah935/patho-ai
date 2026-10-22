@@ -1,0 +1,213 @@
+{
+  "file_id": "93774452-c944-4b80-bc6f-b0b2a464437d",
+  "filename": "RPT000030.pdf",
+  "pipeline_stage": "pdf_preprocessing_ocr_extraction_interpretation",
+  "disclaimer": "\u26a0\ufe0f  IMPORTANT DISCLAIMER: This output is for pathology report understanding and clinical decision support only. It is NOT a medical diagnosis. All results must be reviewed and confirmed by a qualified healthcare professional before any clinical action is taken.",
+  "ocr": {
+    "pages_processed": 0,
+    "total_blocks": 0,
+    "total_lines": 0,
+    "engine": "EasyOCREngine"
+  },
+  "document": {
+    "file_name": "93774452-c944-4b80-bc6f-b0b2a464437d.pdf",
+    "file_path": "D:\\Deep_Learning\\outputs\\uploads\\93774452-c944-4b80-bc6f-b0b2a464437d.pdf",
+    "page_count": 1,
+    "pdf_type": "digital",
+    "metadata": {
+      "format": "PDF 1.4",
+      "title": "SEROLOGY PROFILE",
+      "author": "CityCare Clinical Diagnostics",
+      "subject": "(unspecified)",
+      "keywords": "",
+      "creator": "(unspecified)",
+      "producer": "ReportLab PDF Library - (opensource)",
+      "creationDate": "D:20260729214112+05'00'",
+      "modDate": "D:20260729214112+05'00'",
+      "trapped": "",
+      "encryption": null
+    },
+    "total_text_characters": 926,
+    "total_ocr_text_characters": 0,
+    "total_ocr_processed_text_characters": 0,
+    "pages": [
+      {
+        "page_number": 1,
+        "text": "Laboratory Report\nPage 1\nCC\nCITYCARE CLINICAL DIAGNOSTICS\nIndore Central Branch\n253, Park Street, Indore, Madhya Pradesh - 370990 | Tel: +91 7481244522 | reports0030@citycarelab.in\nwww.citycarediagnostics0030.in | ISO-aligned laboratory quality management system\nSEROLOGY PROFILE\nPatient Name\nDiya Bhat\nPatient ID / UHID\nUHID8745075743\nAge / Sex\n78 Years / Female\nSample ID\nSMP4785537559\nReferred By\nDr. Aditya Kulkarni, MBBS, MD (Pathology)\nAccession No.\nACC6536567044\nSample Collected\n20/01/2026 02:05 PM\nSample Received\n20/01/2026 03:02 PM\nReport Date\n20/01/2026 08:06 PM\nSample Type\nSerum\nContact\n+91 7984296054\nDate of Birth\n05/03/1947\nINVESTIGATION RESULTS\nInvestigation\nResult\nUnit\nBiological Reference Interval\nFlag\nC-Reactive Protein\n2.5\nmg/L\n0 - 5\n-\nASO Titre\n123\nIU/mL\n0 - 200\n-\nFerritin\n89\nng/mL\n15 - 150\n-\nSample Processed By\nLaboratory Technologist\nVerified By\nQuality Control\nAuthorized By\nPathology Department\n",
+        "image_path": "D:\\Deep_Learning\\pathology_ai\\outputs\\rendered_pages\\93774452-c944-4b80-bc6f-b0b2a464437d_page_1.png",
+        "width": 595,
+        "height": 841,
+        "dpi": 300,
+        "text_characters": 926,
+        "ocr_text": "",
+        "ocr_text_characters": 0,
+        "ocr_processed_text": "",
+        "ocr_processed_text_characters": 0,
+        "ocr_blocks": [],
+        "ocr_lines": [],
+        "ocr_engine": "",
+        "ocr_languages": []
+      }
+    ]
+  },
+  "extraction": {
+    "document_category": "Serology / Immunology",
+    "panel_name": "SEROLOGY PROFILE",
+    "laboratory_name": "[PAGE 1]",
+    "patient": {
+      "name": "Diya Bhat",
+      "patient_id": "UHID",
+      "age": 1,
+      "sex": "Female",
+      "sample_id": "SMP4785537559",
+      "accession_number": "ACC6536567044",
+      "referred_by": "Dr. Aditya Kulkarni, MBBS, MD",
+      "sample_type": "Serum",
+      "collection_datetime": "20/01/2026 02:05 PM",
+      "received_datetime": "20/01/2026 03:02 PM",
+      "report_datetime": "20/01/2026 08:06 PM"
+    },
+    "sections": [
+      {
+        "section_name": "Investigation Results",
+        "tests": [
+          {
+            "test_name_raw": "C-Reactive Protein",
+            "test_name_normalized": "C-Reactive Protein",
+            "value_raw": "2.5",
+            "value_numeric": 2.5,
+            "unit_raw": "",
+            "unit_normalized": "",
+            "reference_range_raw": "",
+            "reference_low": null,
+            "reference_high": null,
+            "status": "UNKNOWN",
+            "flag": "",
+            "critical": false,
+            "confidence": 0.8,
+            "explanation": "C-Reactive Protein is 2.5, which could not be classified. Reference range or numeric value unavailable."
+          },
+          {
+            "test_name_raw": "ASO Titre",
+            "test_name_normalized": "ASO Titre",
+            "value_raw": "123",
+            "value_numeric": 123.0,
+            "unit_raw": "",
+            "unit_normalized": "",
+            "reference_range_raw": "",
+            "reference_low": null,
+            "reference_high": null,
+            "status": "UNKNOWN",
+            "flag": "",
+            "critical": false,
+            "confidence": 0.8,
+            "explanation": "ASO Titre is 123, which could not be classified. Reference range or numeric value unavailable."
+          },
+          {
+            "test_name_raw": "Ferritin",
+            "test_name_normalized": "Ferritin",
+            "value_raw": "89",
+            "value_numeric": 89.0,
+            "unit_raw": "",
+            "unit_normalized": "",
+            "reference_range_raw": "",
+            "reference_low": null,
+            "reference_high": null,
+            "status": "UNKNOWN",
+            "flag": "",
+            "critical": false,
+            "confidence": 0.8,
+            "explanation": "Ferritin is 89, which could not be classified. Reference range or numeric value unavailable."
+          }
+        ]
+      }
+    ],
+    "remarks": [],
+    "extraction_confidence": 0.8,
+    "requires_review": false,
+    "summary": "This Serology / Immunology report contains 3 test result(s). 0 are within the normal range."
+  },
+  "interpretation": {
+    "extraction": {
+      "document_category": "Serology / Immunology",
+      "panel_name": "SEROLOGY PROFILE",
+      "laboratory_name": "[PAGE 1]",
+      "patient": {
+        "name": "Diya Bhat",
+        "patient_id": "UHID",
+        "age": 1,
+        "sex": "Female",
+        "sample_id": "SMP4785537559",
+        "accession_number": "ACC6536567044",
+        "referred_by": "Dr. Aditya Kulkarni, MBBS, MD",
+        "sample_type": "Serum",
+        "collection_datetime": "20/01/2026 02:05 PM",
+        "received_datetime": "20/01/2026 03:02 PM",
+        "report_datetime": "20/01/2026 08:06 PM"
+      },
+      "sections": [
+        {
+          "section_name": "Investigation Results",
+          "tests": [
+            {
+              "test_name_raw": "C-Reactive Protein",
+              "test_name_normalized": "C-Reactive Protein",
+              "value_raw": "2.5",
+              "value_numeric": 2.5,
+              "unit_raw": "",
+              "unit_normalized": "",
+              "reference_range_raw": "",
+              "reference_low": null,
+              "reference_high": null,
+              "status": "UNKNOWN",
+              "flag": "",
+              "critical": false,
+              "confidence": 0.8,
+              "explanation": "C-Reactive Protein is 2.5, which could not be classified. Reference range or numeric value unavailable."
+            },
+            {
+              "test_name_raw": "ASO Titre",
+              "test_name_normalized": "ASO Titre",
+              "value_raw": "123",
+              "value_numeric": 123.0,
+              "unit_raw": "",
+              "unit_normalized": "",
+              "reference_range_raw": "",
+              "reference_low": null,
+              "reference_high": null,
+              "status": "UNKNOWN",
+              "flag": "",
+              "critical": false,
+              "confidence": 0.8,
+              "explanation": "ASO Titre is 123, which could not be classified. Reference range or numeric value unavailable."
+            },
+            {
+              "test_name_raw": "Ferritin",
+              "test_name_normalized": "Ferritin",
+              "value_raw": "89",
+              "value_numeric": 89.0,
+              "unit_raw": "",
+              "unit_normalized": "",
+              "reference_range_raw": "",
+              "reference_low": null,
+              "reference_high": null,
+              "status": "UNKNOWN",
+              "flag": "",
+              "critical": false,
+              "confidence": 0.8,
+              "explanation": "Ferritin is 89, which could not be classified. Reference range or numeric value unavailable."
+            }
+          ]
+        }
+      ],
+      "remarks": [],
+      "extraction_confidence": 0.8,
+      "requires_review": false,
+      "summary": "This Serology / Immunology report contains 3 test result(s). 0 are within the normal range."
+    },
+    "patterns": [],
+    "requires_review": false,
+    "summary": "This Serology / Immunology report contains 3 test result(s). 0 are within the normal range.",
+    "disclaimer": "\u26a0\ufe0f  IMPORTANT DISCLAIMER: This output is for pathology report understanding and clinical decision support only. It is NOT a medical diagnosis. All results must be reviewed and confirmed by a qualified healthcare professional before any clinical action is taken."
+  }
+}

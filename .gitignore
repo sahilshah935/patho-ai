@@ -1,0 +1,63 @@
+# ==============================================================================
+# Pathology AI Platform - Git Ignore Rules
+# ==============================================================================
+
+# Virtual Environments (DO NOT COMMIT - very large >5GB)
+.venv/
+venv/
+env/
+ENV/
+*.venv/
+
+# Environment Variables & Secrets (Keep API keys private!)
+.env
+.env.local
+.env.*.local
+*.env
+
+# Node.js dependencies & builds
+node_modules/
+frontend/node_modules/
+.npm/
+
+# Python bytecode & cache
+__pycache__/
+*/__pycache__/
+*/*/__pycache__/
+*/*/*/__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Heavy local artifacts, uploads & cache
+checkpoints/
+*.safetensors
+*.pt
+*.bin
+*.onnx
+outputs/uploads/*
+!outputs/uploads/.gitkeep
+outputs/rendered_pages/*
+!outputs/rendered_pages/.gitkeep
+pathology_dataset/
+raw_documents/
+ocr_ground_truth/
+
+# EasyOCR / Model download caches
+models/easyocr/*
+.cache/
+huggingface/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace

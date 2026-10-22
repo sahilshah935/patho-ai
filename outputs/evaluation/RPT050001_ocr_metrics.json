@@ -1,0 +1,19 @@
+{
+  "prediction_path": "D:\\Deep_Learning\\pathology_ai\\outputs\\predictions\\RPT050001.json",
+  "ground_truth_path": "D:\\Deep_Learning\\pathology_dataset\\ocr_ground_truth\\hematology\\RPT050001.json",
+  "report_id": "RPT050001",
+  "pages_evaluated": 1,
+  "reference_characters": 1273,
+  "predicted_characters": 1327,
+  "cer": 0.31353919239904987,
+  "wer": 0.5526315789473685,
+  "page_metrics": [
+    {
+      "page_number": 1,
+      "reference_characters": 1273,
+      "predicted_characters": 1327,
+      "cer": 0.31353919239904987,
+      "wer": 0.5526315789473685
+    }
+  ]
+}

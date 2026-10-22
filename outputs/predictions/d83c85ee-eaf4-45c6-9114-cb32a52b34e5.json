@@ -1,0 +1,213 @@
+{
+  "file_id": "d83c85ee-eaf4-45c6-9114-cb32a52b34e5",
+  "filename": "RPT000025.pdf",
+  "pipeline_stage": "pdf_preprocessing_ocr_extraction_interpretation",
+  "disclaimer": "\u26a0\ufe0f  IMPORTANT DISCLAIMER: This output is for pathology report understanding and clinical decision support only. It is NOT a medical diagnosis. All results must be reviewed and confirmed by a qualified healthcare professional before any clinical action is taken.",
+  "ocr": {
+    "pages_processed": 0,
+    "total_blocks": 0,
+    "total_lines": 0,
+    "engine": "EasyOCREngine"
+  },
+  "document": {
+    "file_name": "d83c85ee-eaf4-45c6-9114-cb32a52b34e5.pdf",
+    "file_path": "D:\\Deep_Learning\\outputs\\uploads\\d83c85ee-eaf4-45c6-9114-cb32a52b34e5.pdf",
+    "page_count": 1,
+    "pdf_type": "digital",
+    "metadata": {
+      "format": "PDF 1.4",
+      "title": "IMMUNOLOGY PROFILE",
+      "author": "TrustLab Diagnostic Centre",
+      "subject": "(unspecified)",
+      "keywords": "",
+      "creator": "(unspecified)",
+      "producer": "ReportLab PDF Library - (opensource)",
+      "creationDate": "D:20260729214112+05'00'",
+      "modDate": "D:20260729214112+05'00'",
+      "trapped": "",
+      "encryption": null
+    },
+    "total_text_characters": 895,
+    "total_ocr_text_characters": 0,
+    "total_ocr_processed_text_characters": 0,
+    "pages": [
+      {
+        "page_number": 1,
+        "text": "Laboratory Report\nPage 1\nTRUSTLAB DIAGNOSTIC CENTRE\nKolkata West Branch\n182, Main Road, Kolkata, West Bengal - 641722 | Tel: +91 9704256182 | reports0025@trustlablab.in\nwww.trustlabdiagnostics0025.in | Quality Management System compliant laboratory\nIMMUNOLOGY PROFILE\nPatient Name\nAadhya Kapoor\nPatient ID /\nUHID\nUHID3832817478\nAge / Sex\n23 Years / Female\nSample ID\nSMP0902880464\nReferred By\nDr. Shubham Jain, MBBS, DNB (Pathology)\nAccession No.\nACC3354498929\nSample\nCollected\n05/10/2025 06:00 PM\nSample Received\n05/10/2025 06:27 PM\nReport Date\n06/10/2025 08:25 AM\nSample Type\nSerum\nContact\n+91 7910526318\nDate of Birth\n03/06/2002\nINVESTIGATION RESULTS\nTest\nObserved Value\nUnit\nReference Range\nStatus\nC-Reactive Protein\n3.2\nmg/L\n0 - 5\n-\nRF\n3.8\nIU/mL\n0 - 14\n-\nFerritin\n69\nng/mL\n15 - 150\n-\nSample Processed By\nLaboratory Technologist\nVerified By\nQuality Control\nAuthorized By\nPathology Department\n",
+        "image_path": "D:\\Deep_Learning\\pathology_ai\\outputs\\rendered_pages\\d83c85ee-eaf4-45c6-9114-cb32a52b34e5_page_1.png",
+        "width": 595,
+        "height": 841,
+        "dpi": 300,
+        "text_characters": 895,
+        "ocr_text": "",
+        "ocr_text_characters": 0,
+        "ocr_processed_text": "",
+        "ocr_processed_text_characters": 0,
+        "ocr_blocks": [],
+        "ocr_lines": [],
+        "ocr_engine": "",
+        "ocr_languages": []
+      }
+    ]
+  },
+  "extraction": {
+    "document_category": "Serology / Immunology",
+    "panel_name": "IMMUNOLOGY PROFILE",
+    "laboratory_name": "[PAGE 1]",
+    "patient": {
+      "name": "Aadhya Kapoor",
+      "patient_id": "UHID",
+      "age": 1,
+      "sex": "Male",
+      "sample_id": "SMP0902880464",
+      "accession_number": "ACC3354498929",
+      "referred_by": "Dr. Shubham Jain, MBBS, DNB",
+      "sample_type": "Serum",
+      "collection_datetime": "05/10/2025 06:00 PM",
+      "received_datetime": "05/10/2025 06:27 PM",
+      "report_datetime": "06/10/2025 08:25 AM"
+    },
+    "sections": [
+      {
+        "section_name": "Investigation Results",
+        "tests": [
+          {
+            "test_name_raw": "C-Reactive Protein",
+            "test_name_normalized": "C-Reactive Protein",
+            "value_raw": "3.2",
+            "value_numeric": 3.2,
+            "unit_raw": "",
+            "unit_normalized": "",
+            "reference_range_raw": "",
+            "reference_low": null,
+            "reference_high": null,
+            "status": "UNKNOWN",
+            "flag": "",
+            "critical": false,
+            "confidence": 0.8,
+            "explanation": "C-Reactive Protein is 3.2, which could not be classified. Reference range or numeric value unavailable."
+          },
+          {
+            "test_name_raw": "RF",
+            "test_name_normalized": "Rheumatoid Factor",
+            "value_raw": "3.8",
+            "value_numeric": 3.8,
+            "unit_raw": "",
+            "unit_normalized": "",
+            "reference_range_raw": "",
+            "reference_low": null,
+            "reference_high": null,
+            "status": "UNKNOWN",
+            "flag": "",
+            "critical": false,
+            "confidence": 1.0,
+            "explanation": "Rheumatoid Factor is 3.8, which could not be classified. Reference range or numeric value unavailable."
+          },
+          {
+            "test_name_raw": "Ferritin",
+            "test_name_normalized": "Ferritin",
+            "value_raw": "69",
+            "value_numeric": 69.0,
+            "unit_raw": "",
+            "unit_normalized": "",
+            "reference_range_raw": "",
+            "reference_low": null,
+            "reference_high": null,
+            "status": "UNKNOWN",
+            "flag": "",
+            "critical": false,
+            "confidence": 0.8,
+            "explanation": "Ferritin is 69, which could not be classified. Reference range or numeric value unavailable."
+          }
+        ]
+      }
+    ],
+    "remarks": [],
+    "extraction_confidence": 0.8667,
+    "requires_review": false,
+    "summary": "This Serology / Immunology report contains 3 test result(s). 0 are within the normal range."
+  },
+  "interpretation": {
+    "extraction": {
+      "document_category": "Serology / Immunology",
+      "panel_name": "IMMUNOLOGY PROFILE",
+      "laboratory_name": "[PAGE 1]",
+      "patient": {
+        "name": "Aadhya Kapoor",
+        "patient_id": "UHID",
+        "age": 1,
+        "sex": "Male",
+        "sample_id": "SMP0902880464",
+        "accession_number": "ACC3354498929",
+        "referred_by": "Dr. Shubham Jain, MBBS, DNB",
+        "sample_type": "Serum",
+        "collection_datetime": "05/10/2025 06:00 PM",
+        "received_datetime": "05/10/2025 06:27 PM",
+        "report_datetime": "06/10/2025 08:25 AM"
+      },
+      "sections": [
+        {
+          "section_name": "Investigation Results",
+          "tests": [
+            {
+              "test_name_raw": "C-Reactive Protein",
+              "test_name_normalized": "C-Reactive Protein",
+              "value_raw": "3.2",
+              "value_numeric": 3.2,
+              "unit_raw": "",
+              "unit_normalized": "",
+              "reference_range_raw": "",
+              "reference_low": null,
+              "reference_high": null,
+              "status": "UNKNOWN",
+              "flag": "",
+              "critical": false,
+              "confidence": 0.8,
+              "explanation": "C-Reactive Protein is 3.2, which could not be classified. Reference range or numeric value unavailable."
+            },
+            {
+              "test_name_raw": "RF",
+              "test_name_normalized": "Rheumatoid Factor",
+              "value_raw": "3.8",
+              "value_numeric": 3.8,
+              "unit_raw": "",
+              "unit_normalized": "",
+              "reference_range_raw": "",
+              "reference_low": null,
+              "reference_high": null,
+              "status": "UNKNOWN",
+              "flag": "",
+              "critical": false,
+              "confidence": 1.0,
+              "explanation": "Rheumatoid Factor is 3.8, which could not be classified. Reference range or numeric value unavailable."
+            },
+            {
+              "test_name_raw": "Ferritin",
+              "test_name_normalized": "Ferritin",
+              "value_raw": "69",
+              "value_numeric": 69.0,
+              "unit_raw": "",
+              "unit_normalized": "",
+              "reference_range_raw": "",
+              "reference_low": null,
+              "reference_high": null,
+              "status": "UNKNOWN",
+              "flag": "",
+              "critical": false,
+              "confidence": 0.8,
+              "explanation": "Ferritin is 69, which could not be classified. Reference range or numeric value unavailable."
+            }
+          ]
+        }
+      ],
+      "remarks": [],
+      "extraction_confidence": 0.8667,
+      "requires_review": false,
+      "summary": "This Serology / Immunology report contains 3 test result(s). 0 are within the normal range."
+    },
+    "patterns": [],
+    "requires_review": false,
+    "summary": "This Serology / Immunology report contains 3 test result(s). 0 are within the normal range.",
+    "disclaimer": "\u26a0\ufe0f  IMPORTANT DISCLAIMER: This output is for pathology report understanding and clinical decision support only. It is NOT a medical diagnosis. All results must be reviewed and confirmed by a qualified healthcare professional before any clinical action is taken."
+  }
+}

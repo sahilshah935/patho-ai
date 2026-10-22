@@ -1,0 +1,358 @@
+{
+  "benchmark_config": {
+    "sample_per_format": 5,
+    "split": "validation",
+    "categories": [
+      "Hematology",
+      "Biochemistry",
+      "Urinalysis",
+      "Endocrinology",
+      "Serology / Immunology"
+    ]
+  },
+  "aggregate": {
+    "digital": {
+      "count": 5,
+      "avg_name_precision": 0.9667,
+      "avg_name_recall": 0.9667,
+      "avg_name_f1": 0.9667,
+      "avg_value_accuracy": 0.8533,
+      "avg_unit_accuracy": 0.8333,
+      "avg_status_accuracy": 0.8933,
+      "avg_patient_accuracy": 0.4,
+      "avg_extraction_confidence": 0.8899,
+      "avg_elapsed_seconds": 0.266
+    },
+    "scanned": {
+      "count": 5,
+      "avg_name_precision": 0.86,
+      "avg_name_recall": 0.8333,
+      "avg_name_f1": 0.8455,
+      "avg_value_accuracy": 0.95,
+      "avg_unit_accuracy": 0.1452,
+      "avg_status_accuracy": 0.4262,
+      "avg_patient_accuracy": 0.25,
+      "avg_extraction_confidence": 0.8994,
+      "avg_elapsed_seconds": 2.966
+    }
+  },
+  "per_category": {
+    "Biochemistry": {
+      "digital": {
+        "count": 1,
+        "avg_name_precision": 1.0,
+        "avg_name_recall": 1.0,
+        "avg_name_f1": 1.0,
+        "avg_value_accuracy": 1.0,
+        "avg_unit_accuracy": 1.0,
+        "avg_status_accuracy": 1.0,
+        "avg_patient_accuracy": 0.25,
+        "avg_extraction_confidence": 0.8571,
+        "avg_elapsed_seconds": 0.39
+      },
+      "scanned": {
+        "count": 1,
+        "avg_name_precision": 1.0,
+        "avg_name_recall": 1.0,
+        "avg_name_f1": 1.0,
+        "avg_value_accuracy": 1.0,
+        "avg_unit_accuracy": 0.1429,
+        "avg_status_accuracy": 0.7143,
+        "avg_patient_accuracy": 0.25,
+        "avg_extraction_confidence": 0.8571,
+        "avg_elapsed_seconds": 2.92
+      }
+    },
+    "Endocrinology": {
+      "digital": {
+        "count": 1,
+        "avg_name_precision": 1.0,
+        "avg_name_recall": 1.0,
+        "avg_name_f1": 1.0,
+        "avg_value_accuracy": 1.0,
+        "avg_unit_accuracy": 0.5,
+        "avg_status_accuracy": 1.0,
+        "avg_patient_accuracy": 0.5,
+        "avg_extraction_confidence": 0.85,
+        "avg_elapsed_seconds": 0.15
+      },
+      "scanned": {
+        "count": 1,
+        "avg_name_precision": 1.0,
+        "avg_name_recall": 1.0,
+        "avg_name_f1": 1.0,
+        "avg_value_accuracy": 1.0,
+        "avg_unit_accuracy": 0.0,
+        "avg_status_accuracy": 0.3333,
+        "avg_patient_accuracy": 0.25,
+        "avg_extraction_confidence": 0.9333,
+        "avg_elapsed_seconds": 2.82
+      }
+    },
+    "Hematology": {
+      "digital": {
+        "count": 1,
+        "avg_name_precision": 1.0,
+        "avg_name_recall": 1.0,
+        "avg_name_f1": 1.0,
+        "avg_value_accuracy": 1.0,
+        "avg_unit_accuracy": 1.0,
+        "avg_status_accuracy": 1.0,
+        "avg_patient_accuracy": 0.5,
+        "avg_extraction_confidence": 0.9091,
+        "avg_elapsed_seconds": 0.3
+      },
+      "scanned": {
+        "count": 1,
+        "avg_name_precision": 1.0,
+        "avg_name_recall": 1.0,
+        "avg_name_f1": 1.0,
+        "avg_value_accuracy": 1.0,
+        "avg_unit_accuracy": 0.3333,
+        "avg_status_accuracy": 0.3333,
+        "avg_patient_accuracy": 0.25,
+        "avg_extraction_confidence": 0.9467,
+        "avg_elapsed_seconds": 3.83
+      }
+    },
+    "Serology / Immunology": {
+      "digital": {
+        "count": 1,
+        "avg_name_precision": 1.0,
+        "avg_name_recall": 1.0,
+        "avg_name_f1": 1.0,
+        "avg_value_accuracy": 0.6667,
+        "avg_unit_accuracy": 0.6667,
+        "avg_status_accuracy": 0.6667,
+        "avg_patient_accuracy": 0.25,
+        "avg_extraction_confidence": 0.9333,
+        "avg_elapsed_seconds": 0.13
+      },
+      "scanned": {
+        "count": 1,
+        "avg_name_precision": 0.5,
+        "avg_name_recall": 0.5,
+        "avg_name_f1": 0.5,
+        "avg_value_accuracy": 1.0,
+        "avg_unit_accuracy": 0.0,
+        "avg_status_accuracy": 0.0,
+        "avg_patient_accuracy": 0.25,
+        "avg_extraction_confidence": 0.9,
+        "avg_elapsed_seconds": 2.62
+      }
+    },
+    "Urinalysis": {
+      "digital": {
+        "count": 1,
+        "avg_name_precision": 0.8333,
+        "avg_name_recall": 0.8333,
+        "avg_name_f1": 0.8333,
+        "avg_value_accuracy": 0.6,
+        "avg_unit_accuracy": 1.0,
+        "avg_status_accuracy": 0.8,
+        "avg_patient_accuracy": 0.5,
+        "avg_extraction_confidence": 0.9,
+        "avg_elapsed_seconds": 0.36
+      },
+      "scanned": {
+        "count": 1,
+        "avg_name_precision": 0.8,
+        "avg_name_recall": 0.6667,
+        "avg_name_f1": 0.7273,
+        "avg_value_accuracy": 0.75,
+        "avg_unit_accuracy": 0.25,
+        "avg_status_accuracy": 0.75,
+        "avg_patient_accuracy": 0.25,
+        "avg_extraction_confidence": 0.86,
+        "avg_elapsed_seconds": 2.64
+      }
+    }
+  },
+  "per_report": {
+    "digital": [
+      {
+        "total_predicted": 11,
+        "total_ground_truth": 11,
+        "matched": 11,
+        "name_precision": 1.0,
+        "name_recall": 1.0,
+        "name_f1": 1.0,
+        "value_accuracy": 1.0,
+        "unit_accuracy": 1.0,
+        "status_accuracy": 1.0,
+        "patient_accuracy": 0.5,
+        "report_id": "RPT000001",
+        "category": "Hematology",
+        "format": "digital",
+        "difficulty": "easy",
+        "elapsed_seconds": 0.3,
+        "extraction_confidence": 0.9091
+      },
+      {
+        "total_predicted": 7,
+        "total_ground_truth": 7,
+        "matched": 7,
+        "name_precision": 1.0,
+        "name_recall": 1.0,
+        "name_f1": 1.0,
+        "value_accuracy": 1.0,
+        "unit_accuracy": 1.0,
+        "status_accuracy": 1.0,
+        "patient_accuracy": 0.25,
+        "report_id": "RPT000002",
+        "category": "Biochemistry",
+        "format": "digital",
+        "difficulty": "easy",
+        "elapsed_seconds": 0.39,
+        "extraction_confidence": 0.8571
+      },
+      {
+        "total_predicted": 6,
+        "total_ground_truth": 6,
+        "matched": 5,
+        "name_precision": 0.8333,
+        "name_recall": 0.8333,
+        "name_f1": 0.8333,
+        "value_accuracy": 0.6,
+        "unit_accuracy": 1.0,
+        "status_accuracy": 0.8,
+        "patient_accuracy": 0.5,
+        "report_id": "RPT000003",
+        "category": "Urinalysis",
+        "format": "digital",
+        "difficulty": "moderate",
+        "elapsed_seconds": 0.36,
+        "extraction_confidence": 0.9
+      },
+      {
+        "total_predicted": 4,
+        "total_ground_truth": 4,
+        "matched": 4,
+        "name_precision": 1.0,
+        "name_recall": 1.0,
+        "name_f1": 1.0,
+        "value_accuracy": 1.0,
+        "unit_accuracy": 0.5,
+        "status_accuracy": 1.0,
+        "patient_accuracy": 0.5,
+        "report_id": "RPT000004",
+        "category": "Endocrinology",
+        "format": "digital",
+        "difficulty": "moderate",
+        "elapsed_seconds": 0.15,
+        "extraction_confidence": 0.85
+      },
+      {
+        "total_predicted": 3,
+        "total_ground_truth": 3,
+        "matched": 3,
+        "name_precision": 1.0,
+        "name_recall": 1.0,
+        "name_f1": 1.0,
+        "value_accuracy": 0.6667,
+        "unit_accuracy": 0.6667,
+        "status_accuracy": 0.6667,
+        "patient_accuracy": 0.25,
+        "report_id": "RPT000005",
+        "category": "Serology / Immunology",
+        "format": "digital",
+        "difficulty": "moderate",
+        "elapsed_seconds": 0.13,
+        "extraction_confidence": 0.9333
+      }
+    ],
+    "scanned": [
+      {
+        "total_predicted": 15,
+        "total_ground_truth": 15,
+        "matched": 15,
+        "name_precision": 1.0,
+        "name_recall": 1.0,
+        "name_f1": 1.0,
+        "value_accuracy": 1.0,
+        "unit_accuracy": 0.3333,
+        "status_accuracy": 0.3333,
+        "patient_accuracy": 0.25,
+        "report_id": "RPT070001",
+        "category": "Hematology",
+        "format": "scanned",
+        "difficulty": "easy",
+        "elapsed_seconds": 3.83,
+        "extraction_confidence": 0.9467
+      },
+      {
+        "total_predicted": 7,
+        "total_ground_truth": 7,
+        "matched": 7,
+        "name_precision": 1.0,
+        "name_recall": 1.0,
+        "name_f1": 1.0,
+        "value_accuracy": 1.0,
+        "unit_accuracy": 0.1429,
+        "status_accuracy": 0.7143,
+        "patient_accuracy": 0.25,
+        "report_id": "RPT070002",
+        "category": "Biochemistry",
+        "format": "scanned",
+        "difficulty": "easy",
+        "elapsed_seconds": 2.92,
+        "extraction_confidence": 0.8571
+      },
+      {
+        "total_predicted": 5,
+        "total_ground_truth": 6,
+        "matched": 4,
+        "name_precision": 0.8,
+        "name_recall": 0.6667,
+        "name_f1": 0.7273,
+        "value_accuracy": 0.75,
+        "unit_accuracy": 0.25,
+        "status_accuracy": 0.75,
+        "patient_accuracy": 0.25,
+        "report_id": "RPT070003",
+        "category": "Urinalysis",
+        "format": "scanned",
+        "difficulty": "moderate",
+        "elapsed_seconds": 2.64,
+        "extraction_confidence": 0.86
+      },
+      {
+        "total_predicted": 3,
+        "total_ground_truth": 3,
+        "matched": 3,
+        "name_precision": 1.0,
+        "name_recall": 1.0,
+        "name_f1": 1.0,
+        "value_accuracy": 1.0,
+        "unit_accuracy": 0.0,
+        "status_accuracy": 0.3333,
+        "patient_accuracy": 0.25,
+        "report_id": "RPT070004",
+        "category": "Endocrinology",
+        "format": "scanned",
+        "difficulty": "moderate",
+        "elapsed_seconds": 2.82,
+        "extraction_confidence": 0.9333
+      },
+      {
+        "total_predicted": 2,
+        "total_ground_truth": 2,
+        "matched": 1,
+        "name_precision": 0.5,
+        "name_recall": 0.5,
+        "name_f1": 0.5,
+        "value_accuracy": 1.0,
+        "unit_accuracy": 0.0,
+        "status_accuracy": 0.0,
+        "patient_accuracy": 0.25,
+        "report_id": "RPT070005",
+        "category": "Serology / Immunology",
+        "format": "scanned",
+        "difficulty": "moderate",
+        "elapsed_seconds": 2.62,
+        "extraction_confidence": 0.9
+      }
+    ]
+  },
+  "errors": []
+}

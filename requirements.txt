@@ -1,0 +1,41 @@
+# Pathology Report Intelligence Platform — Dependencies
+# Install with: pip install -r requirements.txt
+# CUDA builds for PyTorch: https://pytorch.org/get-started/locally/
+
+# PDF processing
+pymupdf>=1.24.0
+pdfplumber>=0.11.0
+
+# OCR
+easyocr>=1.7.0
+
+# Image processing
+opencv-python>=4.9.0
+Pillow>=10.0.0
+
+# Text similarity / fuzzy matching
+rapidfuzz>=3.6.0
+
+# Deep learning (install the CUDA 12.x build manually if needed)
+torch>=2.2.0
+torchvision>=0.17.0
+
+# Transformers / NLP
+transformers>=4.40.0
+datasets>=2.19.0
+tokenizers>=0.19.0
+sentencepiece>=0.2.0
+
+# Object detection (YOLO - for future layout/table detection)
+ultralytics>=8.2.0
+
+# Report generation
+reportlab>=4.2.0
+
+# Data science utilities
+numpy>=1.26.0
+scipy>=1.13.0
+
+# Serialization / utilities
+tqdm>=4.66.0
+pydantic>=2.7.0
