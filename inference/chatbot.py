@@ -617,11 +617,11 @@ class PathologyChatbot:
         # Intent: Management, Optimization, Diet, Increase/Decrease Guidance
         # e.g. "How to increase hemoglobin?", "How to lower blood sugar?", "Foods to eat for platelets"
         is_management_inquiry = _has_word_or_phrase(q_lower, [
-            "increase", "raise", "boost", "improve", "elevate", "up",
-            "lower", "reduce", "decrease", "bring down", "drop",
-            "treat", "treatment", "cure", "remedy", "fix", "manage", "management",
-            "diet", "food", "foods", "eat", "eating", "avoid", "nutrition", "nutritional",
-            "what should i do", "what to do", "next step", "next steps", "recommendation", "action plan", "protocol"
+            "increase", "raise", "boost", "improve", "elevate", "up", "maximize", "enhance", "higher", "grow", "build", "support",
+            "lower", "reduce", "decrease", "bring down", "drop", "normalize", "control",
+            "treat", "treatment", "cure", "remedy", "remedies", "fix", "manage", "management", "solution", "solutions", "help with",
+            "diet", "food", "foods", "eat", "eating", "avoid", "nutrition", "nutritional", "supplement", "supplements", "intake",
+            "what should i do", "what to do", "next step", "next steps", "recommendation", "action plan", "protocol", "how to", "ways to"
         ])
 
         if is_management_inquiry:

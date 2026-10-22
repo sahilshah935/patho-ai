@@ -819,12 +819,12 @@ export default function App() {
                   <button
                     onClick={() =>
                       handleSendQuestion(
-                        "What foods and evidence-based supplements help safely increase low hemoglobin and iron levels?"
+                        "What foods and evidence-based dietary strategies help safely optimize vital nutrient levels and energy?"
                       )
                     }
                     className="gemini-pill-btn"
                   >
-                    <span>💡 Boost Low Hemoglobin</span>
+                    <span>🥗 Evidence-Based Nutrition</span>
                   </button>
 
                   <button

@@ -17,14 +17,14 @@ from typing import Any, Dict, List, Optional
 
 BIOMARKERS_DB: Dict[str, Dict[str, Any]] = {
     "Hemoglobin": {
-        "aliases": ["hb", "haemoglobin", "hgb"],
+        "aliases": ["hb", "haemoglobin", "hgb", "haemogloblin", "hemogloblin", "hemoglobin level", "haemoglobin level"],
         "category": "Hematology / CBC",
         "role": "An iron-rich protein in red blood cells that transports oxygen from your lungs to all tissues and organs.",
         "normal_range": "Men: 13.5 - 17.5 g/dL | Women: 12.0 - 15.5 g/dL",
         "high_causes": "Dehydration, smoking, chronic hypoxia (COPD, high altitude living), polycythemia vera, heavy endurance training.",
         "low_causes": "Iron deficiency anemia, vitamin B12 or folate deficiency, chronic blood loss (e.g. gastrointestinal, heavy menstruation), kidney disease, bone marrow suppression, chronic inflammatory diseases.",
-        "diet_lifestyle": "• **To Increase:** Iron-rich foods (spinach, lentils, beans, lean red meat, liver, pumpkin seeds, beetroots). Pair with Vitamin C (citrus, bell peppers, tomatoes) to multiply iron absorption by up to 3x.\n• **Avoid:** Drinking tea or coffee immediately with meals, as tannins significantly inhibit iron uptake.\n• **Lifestyle:** Adequate sleep, hydration, and regular moderate exercise.",
-        "doctor_questions": "Ask your doctor if you need ferritin, total iron-binding capacity (TIBC), or an endoscopy/colonoscopy if chronic blood loss is suspected.",
+        "diet_lifestyle": "• **Iron-Rich Foods:** Incorporate dark green leafy vegetables (spinach, kale, moringa), lentils, chickpeas, pumpkin seeds, beetroots, pomegranate, black raisins, dates, and jaggery. For non-vegetarians, lean poultry, fish, and eggs provide bioavailable heme iron.\n• **Absorption Boosters:** Pair iron meals with **Vitamin C** (fresh lemon juice, amla/Indian gooseberry, oranges, tomatoes) which multiplies intestinal iron absorption by up to 3x.\n• **Inhibitors to Avoid:** Do NOT drink tea, coffee, green tea, or cola within 1 to 2 hours of iron-rich meals (tannins and polyphenols strongly inhibit iron uptake). Avoid taking calcium supplements or dairy simultaneously.\n• **Vital Co-Factors:** Ensure adequate Vitamin B12 (dairy, eggs, fish) and Folate/Vitamin B9 (beans, greens) necessary for healthy red blood cell production.",
+        "doctor_questions": "Ask your doctor: Should we check a Complete Iron Profile (Ferritin, TIBC, Transferrin Saturation) and Vitamin B12/Folate to confirm the exact etiology of anemia?",
     },
     "RBC Count": {
         "aliases": ["red blood cell", "red blood cells", "erythrocyte count", "rbc"],
