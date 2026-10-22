@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import json
 import os
+import time
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 import httpx
@@ -53,6 +54,8 @@ class LLMProvider:
     def __init__(self):
         self.provider: str = "offline"
         self.model_name: str = "KnowledgeEngine-v2"
+        self._consecutive_failures: int = 0
+        self._last_failure_time: float = 0.0
         self._detect_provider()
 
     def _detect_provider(self):
@@ -113,6 +116,10 @@ class LLMProvider:
     ) -> Optional[str]:
         """Generate response via configured LLM provider. Returns None if provider fails."""
         self._detect_provider()
+
+        # Fast circuit breaker: if remote provider failed repeatedly, fall back instantly
+        if self._consecutive_failures >= 2 and (time.time() - self._last_failure_time) < 45.0:
+            return None
 
         if self.provider == "gemini":
             return self._call_gemini(prompt, system_prompt, history, max_tokens, temperature)
@@ -187,14 +194,14 @@ class LLMProvider:
             "Content-Type": "application/json",
         }
 
-        # Candidate models to try in order
+        # Candidate models to try in order (fast failover, max 1 fallback)
         candidate_models = [self.model_name]
-        for fallback in ["gemini-flash-latest", "gemini-2.5-flash-lite", "gemini-3-flash-preview"]:
+        for fallback in ["gemini-flash-latest"]:
             if fallback not in candidate_models:
                 candidate_models.append(fallback)
 
         try:
-            with httpx.Client(timeout=35.0) as client:
+            with httpx.Client(timeout=8.0) as client:
                 for model in candidate_models:
                     url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
                     res = client.post(url, json=payload, headers=headers)
@@ -205,6 +212,7 @@ class LLMProvider:
                             parts = candidates[0].get("content", {}).get("parts", [])
                             if parts:
                                 self.model_name = model
+                                self._consecutive_failures = 0
                                 return parts[0].get("text", "").strip()
                     elif res.status_code == 404:
                         # Model not available on this tier, try next candidate
@@ -215,6 +223,8 @@ class LLMProvider:
         except Exception as e:
             print(f"[LLMProvider:Gemini] Request failed: {e}")
 
+        self._consecutive_failures += 1
+        self._last_failure_time = time.time()
         return None
 
     # -----------------------------------------------------------------------

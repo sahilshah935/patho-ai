@@ -248,8 +248,11 @@ export default function App() {
         question: question,
         history: messages.slice(-6).map((m) => ({ sender: m.sender, text: m.text })),
       };
-      if (result?.file_id) {
-        payload.file_id = result.file_id;
+      if (result) {
+        payload.report_data = result;
+        if (result.file_id) {
+          payload.file_id = result.file_id;
+        }
       }
 
       const response = await axios.post(`${API_URL}/chat`, payload);
@@ -260,7 +263,11 @@ export default function App() {
       );
     } catch (err) {
       console.error("Chat error:", err);
-      const errorMsg = { sender: "ai", text: "⚠️ Unable to connect to PathO clinical intelligence service." };
+      const detail = err.response?.data?.detail || err.message || "";
+      const errorMsg = {
+        sender: "ai",
+        text: `⚠️ **Clinical Assistant Notice**\n\nUnable to reach the service (${detail || "Network issue"}). Please verify your connection or try again.`,
+      };
       setThreads((prev) =>
         prev.map((t) => (t.id === activeId ? { ...t, messages: [...t.messages, errorMsg] } : t))
       );

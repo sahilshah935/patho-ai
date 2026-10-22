@@ -44,12 +44,13 @@ UPLOADS_DIR.mkdir(parents=True, exist_ok=True)
 PREDICTIONS_DIR.mkdir(parents=True, exist_ok=True)
 RENDERED_PAGES_DIR.mkdir(parents=True, exist_ok=True)
 
-from typing import Optional, List, Dict
+from typing import Optional, List, Dict, Any
 from pydantic import BaseModel
 from pathology_ai.inference.chatbot import PathologyChatbot
 
 class ChatRequest(BaseModel):
     file_id: Optional[str] = None
+    report_data: Optional[Dict[str, Any]] = None
     question: str
     history: Optional[List[Dict[str, str]]] = None
 
@@ -103,7 +104,7 @@ async def preload_models():
 
 
 MAX_FILE_SIZE = 25 * 1024 * 1024  # 25 MB limit
-SAFE_ID_PATTERN = re.compile(r"^[0-9a-fA-F\-]{16,64}$")
+SAFE_ID_PATTERN = re.compile(r"^[0-9a-zA-Z_\-]{3,64}$")
 
 
 def _validate_safe_id(file_id: str) -> str:
@@ -190,15 +191,25 @@ def upload_pdf(file: UploadFile = File(...)):
 
 @app.post("/chat")
 def chat_with_report(req: ChatRequest):
-    """Accepts an optional report file_id and user question, returning a context-grounded answer."""
+    """Accepts an optional report file_id or direct report_data and user question, returning a context-grounded answer."""
     report_data = None
+
+    # 1. Direct report data provided by client
+    if req.report_data and isinstance(req.report_data, dict):
+        report_data = req.report_data
+
+    # 2. File ID lookup on local disk
     if req.file_id and req.file_id.strip():
         clean_id = _validate_safe_id(req.file_id)
-        output_path = PREDICTIONS_DIR / f"{clean_id}.json"
-        if not output_path.exists():
-            raise HTTPException(status_code=404, detail=f"Report with ID '{clean_id}' not found.")
-        report_data = json.loads(output_path.read_text(encoding="utf-8"))
+        if report_data is None:
+            output_path = PREDICTIONS_DIR / f"{clean_id}.json"
+            if output_path.exists():
+                try:
+                    report_data = json.loads(output_path.read_text(encoding="utf-8"))
+                except Exception:
+                    report_data = None
 
+    # Even without report_data, PathO answers all medical, diet, symptom & lab inquiries
     try:
         chatbot = get_chatbot()
         res = chatbot.answer_question(report_data, req.question, history=req.history)

@@ -82,6 +82,38 @@ class TestAPI(unittest.TestCase):
         self.assertIn("disclaimer", res)
         self.assertIn("Diabetes", res["answer"])
 
+    def test_chat_with_demo_id_and_typo(self):
+        # Even if demo file is not on disk and user has typo 'haemogloblin', it must answer clinically without 400/404
+        req = ChatRequest(file_id="demo_aarav_sharma", question="How to increase the haemogloblin ?")
+        res = chat_with_report(req)
+        self.assertIn("answer", res)
+        self.assertTrue("Hemoglobin" in res["answer"] or "hemoglobin" in res["answer"].lower())
+
+    def test_chat_with_direct_report_data(self):
+        # Should ground response directly in report_data provided by frontend
+        mock_report = {
+            "extraction": {
+                "patient": {"name": "Narendra Gopaldas Khatri", "age": 54, "sex": "Male"},
+                "sections": [{
+                    "section_name": "CBC",
+                    "tests": [
+                        {"test_name_normalized": "Hemoglobin", "value_raw": "9.4", "unit_raw": "g/dL", "status": "LOW", "reference_range_display": "13.0 - 17.0"}
+                    ]
+                }]
+            }
+        }
+        req = ChatRequest(report_data=mock_report, question="How to increase the haemogloblin ?")
+        res = chat_with_report(req)
+        self.assertIn("answer", res)
+        self.assertIn("Narendra Gopaldas Khatri", res["answer"])
+        self.assertIn("9.4 g/dL", res["answer"])
+
+    def test_chat_greeting_hi(self):
+        req = ChatRequest(question="Hi")
+        res = chat_with_report(req)
+        self.assertIn("answer", res)
+        self.assertTrue("PathO" in res["answer"] or "Hello" in res["answer"])
+
     def test_chat_info_endpoint(self):
         from pathology_ai.api.main import get_chat_info
         info = get_chat_info()
